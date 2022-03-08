@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Branch extends Model
 {
     use HasFactory;
+    public function products(){
+        return $this->belongsToMany(Product::class, 'branch_product')
+        ->withPivot('product_id','stock');
+    }
 }

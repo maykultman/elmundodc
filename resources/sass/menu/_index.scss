@@ -1,0 +1,21 @@
+.sideMenu{
+	height: $mainHeight;
+	background-color:$white;
+	ul{
+		li{
+			background-color:transparent;
+			a{
+				color:#8d8d8d;
+				font-family: $font-family-sans-serif;
+				background-color:transparent;
+				&.nav-link{
+					padding:5px 10px;
+				}
+				&.active{
+					color:$primary;
+					font-weight: 500;
+				}
+			}
+		}
+	}
+}

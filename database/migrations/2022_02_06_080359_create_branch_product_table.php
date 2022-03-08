@@ -14,11 +14,17 @@ class CreateBranchProductTable extends Migration
     public function up()
     {
         Schema::create('branch_product', function (Blueprint $table) {
-            // $table->id();
-            $table->foreignId('branch_id')->constrained();
-            $table->foreignId('product_id')->constrained();
-            $table->integer('stock');
-            $table->integer('devolution');
+
+            $table->foreignId('branch_id')->constrained()
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+
+            $table->foreignId('product_id')->constrained()
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+
+            $table->integer('stock')->nullable();
+            $table->integer('devolution')->nullable();
             // $table->timestamps();
         });
     }
