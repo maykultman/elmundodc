@@ -1,6 +1,6 @@
 <div class="col align-self-end">
 	<nav class="navbar navbar-expand-md p-0">
-		<ul class="navbar-nav ms-auto bg-white shadow-sm">
+		<ul class="navbar-nav ms-auto bg-white shadow-sm small">
 			<!-- Authentication Links -->
 			@guest
 				@if (Route::has('login'))

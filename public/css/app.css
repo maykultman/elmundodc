@@ -11309,6 +11309,23 @@ textarea.form-control-lg {
   text-align: left;
 }
 
+.sugerencias {
+  position: absolute;
+  width: 70.5%;
+  left: 20.2%;
+  margin: 0;
+  list-style: none;
+  top: 100%;
+  border: none;
+}
+.sugerencias li:hover {
+  color: #fff;
+  background-color: #78c271;
+}
+.sugerencias li:first-child {
+  border-top: 0px;
+}
+
 .table-flex {
   border-radius: 20px;
   overflow: hidden;
@@ -11317,7 +11334,7 @@ textarea.form-control-lg {
   border-top: 0px !important;
 }
 .table-flex .table-flex-header {
-  padding: 10px 0px;
+  padding: 6px 0px;
   font-weight: 600;
   color: #fff;
   border-radius: 6px;
@@ -11422,4 +11439,26 @@ select.form-control:focus {
   -moz-osx-font-smoothing: grayscale;
   /* Support for IE. */
   font-feature-settings: "liga";
+}
+
+table td {
+  position: relative;
+}
+
+span.disabled {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: no-drop;
+}
+span.disabled:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: color #000;
+  opacity: 0.3;
+  z-index: 1;
 }

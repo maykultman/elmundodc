@@ -1,6 +1,10 @@
 <?php 
 	$links = [
 		[
+			'link'=>'Caja',
+			'icon'=>'attach_money'
+		],
+		[
 			'link'=>'Productos',
 			'icon'=>'qr_code_2'
 		],

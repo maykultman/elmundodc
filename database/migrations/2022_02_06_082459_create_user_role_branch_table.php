@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSaleCustomerTable extends Migration
+class CreateUserRoleBranchTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateSaleCustomerTable extends Migration
      */
     public function up()
     {
-        Schema::table('sale_customer', function (Blueprint $table) {
-            //
+        Schema::create('user_roles', function (Blueprint $table) {
+            $table->integer('user_id');
+            $table->integer('rol');
+            $table->integer('display_rol_name');
         });
     }
 
@@ -25,8 +27,6 @@ class CreateSaleCustomerTable extends Migration
      */
     public function down()
     {
-        Schema::table('sale_customer', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('user_roles');
     }
 }

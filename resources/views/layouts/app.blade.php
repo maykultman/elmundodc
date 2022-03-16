@@ -32,10 +32,10 @@
     <div id="app" class="container-fluid">
         <main class="row">
             @include('static.nav')
-            <div class="col-xs-12 col-sm-9 col-md-10 col-lg-10 d-flex justify-content-center">
+            <div class="col-xs-12 col-sm-9 col-md-10 col-lg-10 d-flex justify-content-center vh-100"  style="overflow:auto;">
                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-11">
                     @include('static.nav-top')
-                    <div class="mt-3">
+                    <div class="mt-3" style="position: relative;">
                         @yield('content')
                     </div>
                 </div>
@@ -49,7 +49,11 @@
         url : '<?=Config::get('app.url')?>:4003'
       }
     </script>
-    <script src="{{ asset('js/main.js') }}" defer></script>
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+    {{-- <script src="{{ asset('js/jqueryValidate.js') }}"></script> --}}
+    <script src="{{ asset('js/autocomplete.js') }}"></script>
 </body>
 </html>

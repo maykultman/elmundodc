@@ -12,31 +12,27 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-Route::get('buscar/producto', 'ProductController@search')->name('buscar.producto');
-// ForceDeletes
-    Route::get('productos/papelera','ProductController@papelera')->name('papelera');
-    Route::get('productos/restore/{id}','ProductController@restore')->name('productos.restore');
-    Route::delete('productos/{code}/forceDelete','ProductController@forceDelete')->name('productos.forceDelete');
-// EndForceDeletes
+// Products
+    Route::get('buscar/producto', 'ProductController@search')->name('buscar.producto');
+    // ForceDeletes
+        Route::get('productos/papelera','ProductController@papelera')->name('papelera');
+        Route::get('productos/restore/{id}','ProductController@restore')->name('productos.restore');
+        Route::delete('productos/{code}/forceDelete','ProductController@forceDelete')->name('productos.forceDelete');
+    // EndForceDeletes
+    Route::resource('productos','ProductController')
+    ->parameters(['productos'=>'product'])->names('productos');
+// End products
 
 Route::resource('sucursales','BranchController');
-Route::resource('productos','ProductController')
-->parameters(['productos'=>'product'])->names('productos');
+Route::resource('caja','CajaController');
 
-
+Route::resource('sales','SaleController')
+->parameters(['sales'=>'sale'])->names('sales');
 
 
 
 Route::resource('usuarios','UserController');
 Route::resource('proveedores','ProviderController');
-// Route::resource('formato', 'DocumentController')
-// ->parameters(['formato'=> 'document'])
-// ->names('formatos');
 
 Auth::routes();
 

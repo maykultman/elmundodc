@@ -3235,9 +3235,13 @@ var header_for_fetch = {
 }; // import Modal from './components/products/ModalShow.vue' // Modal.vue';
 
 var myModal = null;
+var staticBackdrop = document.getElementById('staticBackdrop');
 
 window.onload = function () {
-  myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {});
+  if (staticBackdrop) {
+    myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {});
+  }
+
   var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
   var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
     return new bootstrap.Tooltip(tooltipTriggerEl);

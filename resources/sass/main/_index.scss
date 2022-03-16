@@ -1,6 +1,24 @@
 .text-left{
 	text-align:left;
 }
+.sugerencias{
+	position: absolute;
+    width: 70.5%;
+    left: 20.2%;
+    margin: 0;
+    list-style: none;
+    top: 100%;
+    border: none;
+	li{
+		&:hover{
+			color: #fff;
+			background-color: #78c271;
+		}
+		&:first-child{
+			border-top:0px;
+		}
+	}
+}
 .table-flex{
 	border-radius: 20px;
 	overflow: hidden;
@@ -8,7 +26,7 @@
 		border-top:0px!important;
 	}
 	.table-flex-header{
-		padding: 10px 0px;
+		padding: 6px 0px;
 		font-weight: 600;
 		color:$white;
 		border-radius: 6px;
@@ -106,4 +124,24 @@ select.form-control{
   
 	/* Support for IE. */
 	font-feature-settings: 'liga';
-  }
+}
+table td{
+	position: relative;
+}
+span.disabled{
+	display:block;
+	width: 100%;
+	height: 100%;
+	cursor:no-drop;
+	&:before {
+		content:"";
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		background: color #000;
+		opacity: 0.3;
+		z-index: 1;
+	}
+}

@@ -49,26 +49,6 @@ Route::get('productos/{id}', function ($id) {
     ];
 });
 
-Route::get('sucursales/{id}', function ($id) {
-    $branch = Branch::find($id);//->with('branches');
-    return $branch->products;
-    // return $product->branches;
-    // return [
-    //     "id" => $product->id,
-    //     "provider_id" => $product->provider_id,
-    //     "code" => $product->code,
-    //     "name" => $product->name,
-    //     "price" => $product->price,
-    //     "stock" => $product->stock,
-    //     "provider" => $product->provider,
-    //     "branches" => $product->branches,
-    //     "created_at" => $product->created_at,
-    //     "updated_at" => $product->updated_at->toFormattedDateString()
-    // ];
-});
-// Route::get('/label', function (Request $request) {})
-
-// Route::resource('productos','ProductController');
 Route::post('products/batchDelete', function(Request $request){
     
     $response = Product::whereIn('code',$request)->delete();
@@ -90,11 +70,8 @@ Route::post('products/batchRestore', function(Request $request){
     ];
 });
 
-
-
 Route::post('products/batchDestroy', function(Request $request){
-    
-    // $response = Product::whereIn('code',$request)->delete();
+
     $response = Product::whereIn('code', $response)->withTrashed();
     $response->forceDelete();
 
@@ -104,3 +81,8 @@ Route::post('products/batchDestroy', function(Request $request){
         'data' => $response
     ];
 });
+
+
+Route::apiResource('branches',  'BranchController');
+Route::apiResource('sales','SaleController');
+Route::get('boxCut/{branch_id}','ReportController@boxCut');
