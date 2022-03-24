@@ -4,18 +4,21 @@ const header_for_fetch =  {
 };
 
 async function postData(url = '', data = {}, method) {
-   // Opciones por defecto estan marcadas con un *
-	const response = await fetch(`${site.api+url}`, {
-	 	method: method, // *GET, POST, PUT, DELETE, etc.
-	  	mode: 'cors', // no-cors, *cors, same-origin
-	  	cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-	  	credentials: 'same-origin', // include, *same-origin, omit 
-	  	headers:  header_for_fetch,
-	  	redirect: 'follow', // manual, *follow, error
-	  	// referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-	  	body: JSON.stringify(data) // body data type must match "Content-Type" header
-	});
-	return response.json(); // parses JSON response into native JavaScript objects
+   try{
+      let _response;
+      await fetch(url, {
+         method: 'POST', // or 'PUT'
+         body: JSON.stringify(data), // data can be `string` or {object}!
+         headers: header_for_fetch
+      }).then(res => res.json())
+      .catch(error=>error)
+      .then(response=>{
+         _response = response
+      });
+      return _response;
+   }catch(e){
+      return e;
+   }
 }
 jQuery.fn.serializeFormJSON = function () {
 	var t = {},
@@ -25,15 +28,14 @@ jQuery.fn.serializeFormJSON = function () {
 	})), t
 };
 async function webPostData(url = '', data = {}, method) {
-   // Opciones por defecto estan marcadas con un *
+   
 	const response = await fetch(`${site.url+url}`, {
-	 	method: method, // *GET, POST, PUT, DELETE, etc.
-	  	mode: 'cors', // no-cors, *cors, same-origin
-	  	cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-	  	credentials: 'same-origin', // include, *same-origin, omit 
+	 	method: method,
+	  	mode: 'cors',
+	  	cache: 'no-cache',
+	  	credentials: 'same-origin',
 	  	headers:  header_for_fetch,
-	  	redirect: 'follow', // manual, *follow, error
-	  	// referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+	  	redirect: 'follow',
 	  	body: JSON.stringify(data) // body data type must match "Content-Type" header
 	});
 	return response.json(); // parses JSON response into native JavaScript objects

@@ -1,3 +1,4 @@
+
 const destino = JSON.parse(document.getElementById('listProducts').innerHTML);
 const storage = localStorage.getItem('carrito');
 let carrito = storage ?? [];
@@ -20,6 +21,7 @@ function formatPrice(amount, decimals) {
 	}
 	return amount_parts.join('.');
 }
+
 function _subtotal(){
 	let subtotal = 0;
 	carrito.forEach(value=>{
@@ -52,14 +54,29 @@ function calcularCambio(){
 	if( pagoCon > 0){
 		pagoCon = Number(pagoCon);
 		descuento = Number(descuento);
-		const cambio = pagoCon - ( subtotal.decimal - descuento );
-		$('#cambio').val( cambio );
+		let cambio = pagoCon - ( subtotal.decimal - descuento );
+		$('#cambio').val( formatPrice(cambio,2) );
 	}
 }
 
 function addCart(data){
-	carrito.push(data);
-	$('#cart').append(template(data));
+	$('.campo').val('');
+	if( carrito.find(item=>item.code==data.code) ){
+		const car = carrito.map(item=>{
+			if( item.code === data.code ){
+				item.qty = item.qty + 1;
+				aux = false;
+				return item;
+			}
+			return item;
+		});
+		carrito = car;
+	}else{
+		carrito.push(data);
+		// $('#cart').append(template(data));
+	}
+	$('#cart').html('');
+	carrito.forEach(item=>$('#cart').append(template(item)));
 	getTotal();
 	sugerencias.innerHTML = '';
 }
@@ -116,8 +133,7 @@ if(campo){
     sugerencias.addEventListener('click', ({target})=>{
     	const data = JSON.parse(target.dataset.info);
 		data['qty'] = 1;
-		addCart(data)
-    	
+		addCart(data);
     })
 }
 var currentTarget = null;
@@ -183,20 +199,77 @@ $('#cart').on('change','input',function(){
 	carrito.forEach(item=>$('#cart').append(template(item)));
 });
 
+function isComplete(){
+	if( carrito.length > 0 ){
+		const pagoCon = parseFloat( $('#pagoCon').val() );
+		const total = parseFloat( $('#total').val() );
+		if( pagoCon >=  total ){
+			$('.gbuttons').hide();
+			$('#gloading').fadeIn();
+			return true;
+		}
+	}
+	return false;
+}
 
 $('#sale').submit(function(event){
-	event.preventDefault();
-	if( $('#pagoCon').val() !== '' && ( $('#pagoCon').val() >= $('#total').val() ) ){
+	$('#entries').html('');
+	if( isComplete() ){
 		let form = $('#sale').serializeFormJSON();
-		
 		form['cart'] = carrito;
-		const response = webPostData('/sales', form, 'POST');
-		console.log(response);
+		fetch(`${site.api}/sales`, {
+			method: 'POST', // or 'PUT'
+			body: JSON.stringify(form), // data can be `string` or {object}!
+			headers: header_for_fetch
+		 }).then(res => res.json())
+		.catch(error=>error)
+		.then(response=>{
+			const data = response.data;
+			$('#cart').html('');
+			carrito = [];
+			document.getElementById('sale').reset();
+			data.products.forEach(item=>{
+				$('#entries').append(
+					`<tr>
+						<td>
+							<div>${item.name}</div>
+							<small><strong>Precio: $${item.price}</strong></small> x
+							<small><strong>Cant: ${item.qty}</strong></small>
+						</td>
+						<td>$${ item.qty * item.price }</td>
+					</tr>`
+				);
+			});
+			$('#ticketST').html('$'+ (data.subtotal??0) );
+			$('#ticketDesc').html('$'+ (data.descuento??0) );
+			$('#ticketTotal').html('$'+ (data.total??0) );
+			
+			$('#register').fadeIn();
+			$('.gbuttons').show();
+			$('#gloading').hide();
+		});
+	}else{
+		new Toast({
+			message:"Información de venta incompleta",
+			type: 'warning'
+		});
 	}
+	event.preventDefault();
 });
 
 $('#corteCaja').click(function(event){
 	event.preventDefault();
-	const response = getData('/boxCut/1');
-	console.log(response);
+	$('#loader').fadeIn();
+	fetch(`${site.api}/boxCut/1`)
+	.then(res => res.json())
+	.catch(error=>error)
+	.then(response=>{
+		console.log(response);
+		$('#loader').hide();
+
+	});
+	
+})
+$('#closeTicket').click(function(event){
+	$('#register').fadeOut();
 })

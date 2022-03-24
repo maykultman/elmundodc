@@ -14,6 +14,9 @@
     
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"  rel="stylesheet">
+
+   
+    <link rel="stylesheet" href="{{ asset('js/Toast/toast.css') }}"/>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -42,6 +45,14 @@
             </div>
         </main>
     </div>
+    <div id="loader" class="load">
+      <svg width="70px" height="70px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="lds-dual-ring">
+        <circle cx="50" cy="50" fill="none" stroke-linecap="round" r="40" stroke-width="4" stroke="#f3f3f3" stroke-dasharray="62.83185307179586 62.83185307179586" transform="rotate(312 50 50)">
+          <animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;360 50 50" keyTimes="0;1" dur="1s" begin="0s" repeatCount="indefinite">
+          </animateTransform>
+        </circle>
+      </svg>
+    </div>
     <script>
       var site = {
         current : '<?=request()->route()->getName()?>',
@@ -49,11 +60,12 @@
         url : '<?=Config::get('app.url')?>:4003'
       }
     </script>
-    
+
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
-    {{-- <script src="{{ asset('js/jqueryValidate.js') }}"></script> --}}
+    <script src="{{ asset('js/Toast/toast.js') }}"></script>
     <script src="{{ asset('js/autocomplete.js') }}"></script>
+    
 </body>
 </html>

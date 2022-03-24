@@ -63,8 +63,11 @@
 						<tr>
 							<th colspan="2">
 								<div class="d-flex justify-content-between">
-									<a id="corteCaja" class="btn btn-primary">Realizar corte</a>
-									<button type="submit" class="btn btn-primary">Cobrar</button>
+									<a id="corteCaja" class="btn btn-primary gbuttons">Realizar corte</a>
+									<button type="submit" class="btn btn-primary gbuttons">Cobrar</button>
+									<div id="gloading" style="display: none">
+										<div class="spinner-border" role="status">
+									</div>
 								</div>
 							</th>
 						</tr>
@@ -77,4 +80,6 @@
 <div id="listProducts" hidden>
 	{{ $products }}
 </div>
+@include('cashbox._ticket')
 @endsection
+<div class="toast">        <div class="body warning">...</div> </div>

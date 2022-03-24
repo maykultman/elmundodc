@@ -82,6 +82,8 @@ Route::post('products/batchDestroy', function(Request $request){
     ];
 });
 
+Route::apiResource('sales','SaleController')
+->parameters(['sales'=>'sale'])->names('sales');
 
 Route::apiResource('branches',  'BranchController');
 Route::apiResource('sales','SaleController');

@@ -18,7 +18,7 @@ class ProductFactory extends Factory
             'provider_id' => $faker->numberBetween(1,6),
             'code' => $faker->unique()->ean13(),
             'name' => $faker->sentence($nbWords = 2, $variableNbWords = true),
-            'price' => $faker->randomFloat($nbMaxDecimals = NULL, $min = 0, $max = 3),
+            'price' => $faker->randomFloat($nbMaxDecimals = 2, $min = 20, $max = 200),
             'stock' => $faker->randomNumber(),
         ];
     }

@@ -26,10 +26,10 @@ class DatabaseSeeder extends Seeder
         // \App\Models\Discount::factory()->count(3)->create();
 
         // \App\Models\Product::truncate();
-        // \App\Models\Product::factory(30)->create();
+        \App\Models\Product::factory(30)->create();
 
         // \App\Models\User::truncate();
-        \App\Models\User::factory(8)->create();
+        // \App\Models\User::factory(8)->create();
 
     }
 }
