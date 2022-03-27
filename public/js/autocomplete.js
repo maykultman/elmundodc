@@ -1,5 +1,6 @@
 
 const destino = JSON.parse(document.getElementById('listProducts').innerHTML);
+console.log(destino);
 const storage = localStorage.getItem('carrito');
 let carrito = storage ?? [];
 const print = (arg) => console.log(arg);

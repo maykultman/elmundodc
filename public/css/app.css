@@ -11341,7 +11341,7 @@ textarea.form-control-lg {
   background-color: #64d5b0;
 }
 .table-flex .table-flex-body {
-  height: 500px;
+  height: 440px;
   overflow: scroll;
 }
 .table-flex .table-flex-body .table-row-flex {
@@ -11518,4 +11518,18 @@ span.disabled:before {
 }
 #register #ticket table tfoot th {
   border-top: 1px solid black;
+}
+
+.login img {
+  margin-top: -100px;
+  display: block;
+}
+@media (max-width: 640px) {
+  .login img {
+    margin-top: 10px;
+    width: 200px;
+    margin-top: -50px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
