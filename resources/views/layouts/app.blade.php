@@ -65,7 +65,9 @@
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
     <script src="{{ asset('js/Toast/toast.js') }}"></script>
-    <script src="{{ asset('js/autocomplete.js') }}"></script>
+    @if( request()->route()->getName() == 'caja.index' )
+      <script src="{{ asset('js/autocomplete.js') }}"></script>
+    @endif
     
 </body>
 </html>

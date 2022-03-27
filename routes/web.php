@@ -31,9 +31,12 @@ Route::resource('sales','SaleController')
 
 
 
-Route::resource('usuarios','UserController');
-Route::resource('proveedores','ProviderController');
+Route::resource('usuarios','UserController')
+->parameters(['usuarios'=>'user'])->names('usuarios');
+
+Route::resource('proveedores','ProviderController')
+->parameters(['proveedores'=>'provider'])->names('proveedores');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

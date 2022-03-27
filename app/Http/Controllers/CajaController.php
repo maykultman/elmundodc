@@ -4,16 +4,40 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Branch;
 class CajaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct(){
+        $this->middleware('auth');
+        $this->_user = auth()->user();
+    }
+    private function rol(){
+        return auth()->user()->rol;
+    }
+           // $products = Product::whereHas('branches', function ($query) use ($rol){
+        //     $query->where('branches.id', $rol->branch_id);
+        // })->get();
+        // return $products;
     public function index()
     {
-        $products = Product::select('code','name','price')->get();
+        $rol = $this->rol();
+        $branch = Branch::where('id', $rol->branch_id)->with('products')->firstOrFail();
+        $products = [];
+        $copyProducts = $branch->products->toArray();
+        foreach ($branch->products as $index => $product){
+            $k = array_search($product->code, array_column($products, 'code'));
+            if( $k === false ){
+                array_push($products,[
+                    "id" => $product->pivot['product_id'],
+                    "code" => $product->code,
+                    "name" => $product->name,
+                    "price" => $product->price,
+                    "stock" => $product->pivot['stock'],
+                    "branch_id" => $product->pivot['branch_id']
+                ]);
+            }
+        }
+        // return $products;
         return view('cashbox.index', compact('products'));
     }
 

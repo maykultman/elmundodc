@@ -33,15 +33,14 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    // public function setPasswordAttributes($password){
+    public function rol(){
+        return $this->hasOne(UserRoles::class);
+    }
+    // public function setPasswordAttributes($password)
+    // {
     //     $this->attributes['password'] = bcrypt($password);
     // }
 }

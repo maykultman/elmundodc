@@ -1,86 +1,74 @@
 <?php
-
 namespace App\Http\Controllers;
+use App\Http\Requests\SaveUserRequest;
 
-// use App\Http\Requests\StoreUserRequest;
-// use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct(){
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
-        echo Hash::make('holi');
+        $users = User::paginate(6);
+        return view('users.index',compact('users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $user = new User();
+        return view('users.new', compact('user'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreUserRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreUserRequest $request)
+    public function store(SaveUserRequest $request)
     {
-        //
+        if( $request->validated() ){
+            $validated = $request->validated();
+            $user = User::create([
+                'name' => $validated['name'],
+                'email' => $validated['email'],
+                'password' => bcrypt($validated['password'])
+            ]); 
+
+            return redirect()->route('usuarios.edit', $user)
+            ->with('status','El usuario se ha guardo con éxito');
+        }
+        return redirect()->route('users.create', $user)
+            ->with('status','Intenta nuevamente');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $User
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $User)
+    public function show(User $User){}
+
+    public function edit(User $user)
     {
-        //
+        return view('users.edit', compact('user'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $User
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $User)
-    {
-        //
+    public function update(Request $request, User $user)
+    {   
+        if($request->password!=''){
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password)
+            ]);
+        }else{
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email
+            ]);
+        }
+        return redirect()->route('usuarios.edit', $user)
+            ->with('status','El usuario se ha guardo con éxito');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateUserRequest  $request
-     * @param  \App\Models\User  $User
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateUserRequest $request, User $User)
+    public function destroy(User $user)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\User  $User
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(User $User)
-    {
-        //
+        $user->delete();
+        return redirect()->route('usuarios.index')
+        ->with('status','El usuario se ha eliminado con éxito');
     }
 }

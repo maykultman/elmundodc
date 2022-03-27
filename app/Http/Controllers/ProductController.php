@@ -11,15 +11,19 @@ use App\Models\Branch;
 
 class ProductController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->paginate = 10;
+        $this->middleware('auth');
+    } 
     public function index()
     {
-        $products = Product::orderBy('id','desc')->paginate(15);
+        $products = Product::orderBy('id','desc')->paginate($this->paginate);
         return view('products.index', compact('products'));
     }
 
     public function papelera(){
-        $products = Product::onlyTrashed()->paginate(15);
+        $products = Product::onlyTrashed()->paginate($this->paginate);
         return view('products.index', compact('products'));
     }
     public function create()
@@ -50,7 +54,7 @@ class ProductController extends Controller
         $products = Product::query()
             ->where('code', 'LIKE', "%{$search}%")
             ->orWhere('name', 'LIKE', "%{$search}%")
-            ->paginate(15);
+            ->paginate($this->paginate);
         
         return view('products.index', compact('products'));
     }

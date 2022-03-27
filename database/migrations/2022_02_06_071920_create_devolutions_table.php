@@ -22,7 +22,10 @@ class CreateDevolutionsTable extends Migration
             $table->string('total');
             $table->timestamps();
             
-            $table->foreign('sale_id')->references('id')->on('sales');
+            $table->foreign('sale_id')
+                    ->references('id')
+                    ->on('sales');
+                    
             $table->foreign('user_id')
                     ->references('id')
                     ->on('users')

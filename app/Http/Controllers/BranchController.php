@@ -7,7 +7,9 @@ use App\Models\Branch;
 use App\Models\Product;
 class BranchController extends Controller
 {
-
+    public function __construct(){
+        $this->middleware('auth');
+    }
     public function index()
     {
         $branches = Branch::orderBy('id','desc')->paginate(6);

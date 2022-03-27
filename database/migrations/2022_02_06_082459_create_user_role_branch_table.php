@@ -14,9 +14,22 @@ class CreateUserRoleBranchTable extends Migration
     public function up()
     {
         Schema::create('user_roles', function (Blueprint $table) {
-            $table->integer('user_id');
-            $table->integer('rol');
-            $table->integer('display_rol_name');
+            $table->unsignedBigInteger('branch_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->string('rol');
+            $table->string('display_rol_name');
+
+            $table->foreign('branch_id')
+                ->references('id')
+                ->on('branches')
+                ->onUpdate('cascade')
+                ->onDelete('set null');
+            
+            $table->foreign('user_id')
+                    ->references('id')
+                    ->on('users')
+                    ->onUpdate('cascade')
+                    ->onDelete('set null');
         });
     }
 

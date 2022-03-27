@@ -9,6 +9,7 @@
 			<ul class="sugerencias list-group"></ul>
 			<button type="submit" class="btn btn-primary">Buscar</button>
 		</div>
+		
 		<div class="table table-flex small rounded-3">
 			<div class="table-row-flex table-flex-header gradient">
 				<div class="item-rf">Código</div>
@@ -78,8 +79,8 @@
 	</div>
 </div>
 <div id="listProducts" hidden>
-	{{ $products }}
+	{{ json_encode($products) }}
 </div>
 @include('cashbox._ticket')
 @endsection
-<div class="toast">        <div class="body warning">...</div> </div>
+<div class="toast"><div class="body warning"></div> </div>

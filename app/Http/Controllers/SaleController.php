@@ -7,21 +7,14 @@ use App\Models\Sale;
 use App\Models\Sale_Product;
 class SaleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-    return 'code';
+    public function __construct(){
+        $this->middleware('auth');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function index(){
+        return 'code';
+    }
+
     public function create()
     {
         //

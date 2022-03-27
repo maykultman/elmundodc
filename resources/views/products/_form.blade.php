@@ -46,7 +46,7 @@
 			@endif
 			<div class="form-group">
 				<button class="btn btn-primary text-white">{{ $btnText }}</button>
-				<a href="{{ route('productos.index') }}" class="btn btn-primary text-white">Cancelar</a>
+				<a href="{{ route('productos.index') }}" class="btn btn-primary text-white">Regresar</a>
 			</div>
 		</div>
 		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">

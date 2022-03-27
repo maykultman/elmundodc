@@ -28,7 +28,7 @@
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><br>
 				<button class="btn btn-primary text-white">{{ $btnText }}</button>
-				<a href="{{ route('sucursales.index') }}" class="btn btn-primary text-white">Cancelar</a>
+				<a href="{{ route('sucursales.index') }}" class="btn btn-primary text-white">Regresar</a>
 			</div>
 		</div>
 	</div>

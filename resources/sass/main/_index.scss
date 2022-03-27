@@ -34,7 +34,7 @@
 		
 	}
 	.table-flex-body{
-		height: 500px;
+		height: 440px;
 		overflow:scroll;
 		.table-row-flex{
 			color:$body-color;
@@ -198,3 +198,19 @@ span.disabled{
 			}
 		}
   	}
+
+.login{
+	img{
+		margin-top:-100px;
+		display:block;
+	}
+	@media(max-width:640px){
+		img{
+			margin-top:10px ;
+			width: 200px;
+			margin-top:-50px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+	}
+}

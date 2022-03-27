@@ -1,6 +1,6 @@
 @if(session('status'))
 	<div class="row justify-content-end">
-		<div class="col-xs-12 col-sm-8 col-md-6 col-lg-4 lg-center">
+		<div class="col-xs-12 col-sm-8 col-md-6 col-lg-5 lg-center">
 			<div role="alert" class="alert alert-primary d-flex justify-content-between">
 				<div>
 					<svg width="24" height="24" role="img" aria-label="Info:" class="bi flex-shrink-0 me-2">

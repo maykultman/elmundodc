@@ -10,4 +10,11 @@ function getBranchStock($branches, $branch_id){
 	endforeach;
 	return ['stock'=> 0, 'devolution'=>0];
 }
+function printCheked($value, $isEqual){
+	$bool = '';
+	if($value == $isEqual ){
+		$bool = 'checked="checked"';
+	}
+	return $bool;
+}
 
