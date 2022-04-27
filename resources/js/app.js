@@ -65,7 +65,7 @@ const app = new Vue({
 
     methods : {
         getInfoProduct(id){
-            fetch('http://localhost:4003/api/productos/'+id,{
+            fetch(site.api+'/productos/'+id,{
                 headers : header_for_fetch,
                 method: 'GET'
             })

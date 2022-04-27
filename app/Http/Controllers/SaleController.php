@@ -28,10 +28,10 @@ class SaleController extends Controller
      */
     public function store(Request $request)
     {
-        $products = [];
+        $products = []; $product=null;
         $sale = Sale::create([
-            'branch_id' => 1,
-            'user_id' => 2,
+            'branch_id' => $request->branch_id,
+            'user_id' => $request->user_id,
             'folio' => date('U'),
             'subtotal' => $request->subtotal,
             'discount' => ($request->descuento ?? 0),
@@ -52,6 +52,9 @@ class SaleController extends Controller
                         'qty' => $sp['qty']
                     ]
                 );
+                // $product = Product::whereCode($sp['code']);
+                
+                // $product=null;
             }
             $sale->products()->createMany($products);
         }

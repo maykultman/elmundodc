@@ -36,8 +36,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function rol(){
-        return $this->hasOne(UserRoles::class);
+
+    public function roles(){
+        return $this->belongsToMany(Rol::class)->withPivot('branch_id');
+    }
+    public function branch(){
+        if(isset($this->roles[0])){
+            $branch_id = $this->roles[0]->pivot->branch_id;
+            $branch = Branch::find($branch_id);
+            return $branch->name;
+        }
     }
     // public function setPasswordAttributes($password)
     // {

@@ -20,8 +20,9 @@ class CajaController extends Controller
         // return $products;
     public function index()
     {
-        $rol = $this->rol();
-        $branch = Branch::where('id', $rol->branch_id)->with('products')->firstOrFail();
+        // $rol = $this->rol();
+        $branch = Branch::where('id', 1)->with('products')->firstOrFail();
+        // $branch = Branch::where('id', $rol->branch_id)->with('products')->firstOrFail();
         $products = [];
         $copyProducts = $branch->products->toArray();
         foreach ($branch->products as $index => $product){

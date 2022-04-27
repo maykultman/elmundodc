@@ -1,9 +1,11 @@
 <div class="d-flex my-3 justify-content-between align-items-center">
-    @if( request()->route()->getName() == 'caja.index' )
-        <div class="col">
-            <h3>Caja</h3>
-        </div>
-    @endif
-    
+    <div class="col">
+        <strong>
+            @if( Auth::user()->roles )
+                Sucursal {{ Auth::user()->branch() }} | 
+                {{ Auth::user()->roles[0]->display_name }}
+            @endif
+        </strong>
+    </div>
 	@include('static/tab-login')
 </div>

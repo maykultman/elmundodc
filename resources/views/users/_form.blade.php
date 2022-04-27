@@ -24,18 +24,41 @@
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mb-2">
 			<label class="custom-file-label">Contraseña</label>
+			
 			<input name="password" type="password" class="form-control" value="">
+			
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mb-2">
 			<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-				<input type="radio" class="btn-check" name="role" id="btnradio1" value="user" autocomplete="off"
-					{{ printCheked( $user->rol->rol, 'cajero' ) }}
-				>
-				<label class="btn btn-outline-primary" for="btnradio1">Cajero</label>
-				<input type="radio" class="btn-check" name="role" id="btnradio2" value="admin" autocomplete="off"
-				  	{{ printCheked($user->rol->rol, 'admin' ) }}
-			  	>
-			  	<label class="btn btn-outline-primary" for="btnradio2">Admin</label>
+				@foreach($roles as $r)
+					<input 
+						id="btnradio{{$r->id}}"
+						type="radio" 
+						class="btn-check" 
+						name="rol_id" 
+						value="{{$r->id}}"
+						{{ isset($user->roles[0]->id) && ( $user->roles[0]->id == $r->id ) ? 'checked="checked"' : '' }}
+					>
+					<label class="btn btn-outline-primary" for="btnradio{{$r->id}}">{{$r->display_name}}</label>
+				@endforeach
+		  	</div>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 my-2">
+			<h5 class="">Asignar sucursal</h5>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 my-2">
+			<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+				@foreach($branches as $b)
+					<input 
+						id="btnBranch{{$b->id}}" 
+						type="radio" 
+						class="btn-check" 
+						name="branch_id" 
+						{{ isset($user->roles[0]->pivot) && ( $user->roles[0]->pivot->branch_id == $b->id ) ? 'checked="checked"' : '' }}
+						value="{{$b->id}}"
+					>
+					<label class="btn btn-outline-primary" for="btnBranch{{$b->id}}">{{$b->name}}</label>
+				@endforeach
 		  	</div>
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><br>

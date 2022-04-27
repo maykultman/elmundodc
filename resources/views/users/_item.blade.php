@@ -6,6 +6,12 @@
 	</div>
 	<div class="item-rf justify-content-start">{{$p->name}}</div>
 	<div class="item-rf">{{$p->email}}</div>
+	<div class="item-rf">
+		{{ $p->branch() }}
+	</div>
+	<div class="item-rf">
+		{{ isset($p->roles[0])?$p->roles[0]->display_name:''}}
+	</div>
 	<div class="item-rf">{{$p->updated_at->toFormattedDateString()}}</div>
 	<div class="item-rf text-center d-flex aling-items-center actions">
 		@if( request()->routeIs('papelera') )

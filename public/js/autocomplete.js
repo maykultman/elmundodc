@@ -1,6 +1,7 @@
 
-const destino = JSON.parse(document.getElementById('listProducts').innerHTML);
-console.log(destino);
+const listProducts = JSON.parse(document.getElementById('listProducts').innerHTML);
+
+var currentTarget = null;
 const storage = localStorage.getItem('carrito');
 let carrito = storage ?? [];
 const print = (arg) => console.log(arg);
@@ -82,7 +83,7 @@ function addCart(data){
 	sugerencias.innerHTML = '';
 }
 function autoComplete(item) {
-	return destino.filter((valor) => {
+	return listProducts.filter((valor) => {
 		const valorMinuscula = valor.name.toLowerCase()
 	   	const itemMinuscula = item.toLowerCase()
 	   	return valorMinuscula.includes(itemMinuscula)
@@ -137,7 +138,7 @@ if(campo){
 		addCart(data);
     })
 }
-var currentTarget = null;
+
 $(document).on("keyup", function(e) {
 	if (e.which == 40) {
     	//Keydown
@@ -170,7 +171,7 @@ $(document).on("keyup", function(e) {
         }
         storeTarget.addClass("active");
     }
-      
+    
     if( e.key == 'Enter' ){
     	let data = $(currentTarget).data('info');
 		data['qty'] = 1;

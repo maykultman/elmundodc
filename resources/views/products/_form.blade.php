@@ -18,6 +18,11 @@
 				</div>
 			</div>
 			<div class="custom-file mb-2">
+				<label class="custom-file-label">Precio de compra</label>
+				<input name="price" type="text" class="form-control" 
+						value=" {{old( 'purchase_price', $product->purchase_price ) }}">
+			</div>
+			<div class="custom-file mb-2">
 				<label class="custom-file-label">Precio</label>
 				<input name="price" type="text" class="form-control" 
 						value=" {{old( 'price', $product->price ) }}">

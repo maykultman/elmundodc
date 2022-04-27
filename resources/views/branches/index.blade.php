@@ -3,13 +3,6 @@
 @section('content')
 	<div class="d-flex mt-2 mb-3 justify-content-between">
 		<div>
-			<form action="{{ route('buscar.producto') }}" method="GET" class="input-group mb-2">
-				<label class="input-group-text">Nombre / Código: </label>
-				<input type="search" name="search" class="form-control" required/>
-				<button type="submit" class="btn btn-primary">Buscar</button>
-			</form>
-		</div>
-		<div>
 			@if( request()->routeIs('papelera') )
 				<a href="{{ route('sucursales.index') }}" class="btn btn-primary material-icons"
 					data-bs-toggle="tooltip" data-bs-placement="top" title="Ir a todos los productos">list</a>

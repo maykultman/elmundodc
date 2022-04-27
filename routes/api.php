@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('productos/{id}', function ($id) {
-    $product = Product::find($id);//->with('branches');
+    $product = Product::where('id',$id)->with('branches')->first();
     $branches = Branch::select('id','name')->get();
     
     foreach($branches as $k => $branch){
@@ -40,8 +40,8 @@ Route::get('productos/{id}', function ($id) {
                 "price" => $product->price,
                 "stock" => $product->stock,
                 "provider" => [
-                    "name" => $product->provider->name,
-                    "phone" => $product->provider->phone,
+                    "name" => ( isset($product->provider->name) ? $product->provider->name : '' ),
+                    "phone" => ( isset($product->provider->phone)? $product->provider->phone : '' )
                 ],
                 "updated_at" => $product->updated_at->toFormattedDateString(),
             ],

@@ -10,6 +10,15 @@ function getBranchStock($branches, $branch_id){
 	endforeach;
 	return ['stock'=> 0, 'devolution'=>0];
 }
+
+function getProductStock($products, $product_id){
+	$product = $products->where('id', $product_id)->first();
+	if($product){
+		return ['stock'=> $product->pivot->stock, 'devolution'=>0];
+	}
+	return ['stock'=> 0, 'devolution'=>0];
+}
+
 function printCheked($value, $isEqual){
 	$bool = '';
 	if($value == $isEqual ){

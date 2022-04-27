@@ -33,6 +33,8 @@
 			</div>
 			<div class="item-rf">Nombre</div>
 			<div class="item-rf">Correo</div>
+			<div class="item-rf">Sucursal</div>
+			<div class="item-rf">Rol</div>
 			<div class="item-rf">Actualizado</div>
 			<div class="item-rf text-center">Acciones</div>
 		</div>

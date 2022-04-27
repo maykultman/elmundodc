@@ -14,7 +14,7 @@
 			<form method="POST"
 				onsubmit="return confirm('¿Desea restaurar este producto?');"
 				class="d-inline" action="{{route('sucursales.restore', $p)}}">
-				@csrf
+				@csrf @method('PATCH')
 				<button class="material-icons btn recycling"
 				data-bs-toggle="tooltip" data-bs-placement="top" title="Restaurar">recycling</button>
 			</form>
@@ -27,7 +27,6 @@
 					data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar producto">clear</button>
 			</form>
 		@else
-			
 			<a href="{{ route('sucursales.edit', $p ) }}" class="material-icons edit btn" 
 				data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
 				edit

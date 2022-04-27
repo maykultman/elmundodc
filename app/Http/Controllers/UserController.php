@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SaveUserRequest;
 
 use App\Models\User;
+use App\Models\Rol;
+use App\Models\Branch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
@@ -33,6 +35,8 @@ class UserController extends Controller
                 'password' => bcrypt($validated['password'])
             ]); 
 
+
+
             return redirect()->route('usuarios.edit', $user)
             ->with('status','El usuario se ha guardo con éxito');
         }
@@ -44,11 +48,17 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        return view('users.edit', compact('user'));
+        $roles = Rol::all();
+        $branches = Branch::all();
+        $branch = '';
+        if(isset($user->roles[0])){
+            $branch = $branches->find($user->roles[0]->pivot->branch_id);
+        }
+        return view('users.edit', compact('user','roles','branches','branch'));
     }
 
     public function update(Request $request, User $user)
-    {   
+    {  
         if($request->password!=''){
             $user->update([
                 'name' => $request->name,
@@ -61,6 +71,7 @@ class UserController extends Controller
                 'email' => $request->email
             ]);
         }
+        $user->roles()->sync( [ $request->rol_id => ['branch_id'=>$request->branch_id] ]);
         return redirect()->route('usuarios.edit', $user)
             ->with('status','El usuario se ha guardo con éxito');
     }

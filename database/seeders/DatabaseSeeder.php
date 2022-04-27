@@ -29,10 +29,13 @@ class DatabaseSeeder extends Seeder
         // \App\Models\Product::factory(30)->create();
         // \App\Models\BranchProduct::factory(300)->create();
 
-        \App\Models\UserRoles::factory(6)->create();
+        // \App\Models\UserRoles::factory(6)->create();
 
         // \App\Models\User::truncate();
         // \App\Models\User::factory(8)->create();
+
+        // \App\Models\RolUserBranch::factory(1)->create();
+        \App\Models\Rol::factory(1)->create();
 
     }
 }

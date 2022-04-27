@@ -23,6 +23,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $redirect = '/caja';
+        if (auth()->user()->roles[0]->rol_id == 2 ) {
+            $redirect = '/productos';
+        }
+        return redirect($redirect);
     }
 }

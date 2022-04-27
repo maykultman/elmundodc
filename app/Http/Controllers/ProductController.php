@@ -115,9 +115,9 @@ class ProductController extends Controller
         }
         return redirect()->route('productos.index')->with($message);
     }
-    public function restore($id)
-    {
-        $product = Product::withTrashed()->whereId($id)->firstOrFail();
+    public function restore($code)
+    {   
+        $product = Product::withTrashed()->whereCode($code)->firstOrFail();
         $product->restore();
         return redirect()->route('productos.index')->with('status','El producto fue restaurado con éxito');
     }

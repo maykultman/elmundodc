@@ -3,7 +3,7 @@
 /public/storage
 /storage/*.key
 /vendor
-.DS_Store
+*.DS_Store
 .env
 .env.backup
 .phpunit.result.cache
@@ -14,3 +14,6 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+*.zip
+*.gitignore
+sftp-config.json

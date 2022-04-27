@@ -29,7 +29,7 @@
 		@foreach($links as $a)
 			<?php $name = strtolower($a['link']); ?>
 			<li class="list-group-item d-flex align-items-center">
-				<a href="/{{ $name }}" class="nav-link {{ setActive( $name ) }}">
+				<a href="/{{ $name }}" class="d-flex align-items-center nav-link {{ setActive( $name ) }}">
 					<i class="material-icons mx-2">{{$a['icon']}}</i> {{$a['link']}}
 				</a>
 			</li>

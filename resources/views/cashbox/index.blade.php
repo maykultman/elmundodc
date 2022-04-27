@@ -27,6 +27,8 @@
 		<div class="card">
 			<form id="sale" class="card-body">
 				<table class="table table-striped">
+					{{-- <input type="hidden" name="branch_id" value="{{ Auth::user()->rol->branch->id }}">
+					<input type="hidden" name="user_id" value="{{ Auth::user()->id }}"> --}}
 					<thead>
 						<tr><th>Fecha</th><th><?=date('Y-m-d')?></th></tr>
 					</thead>

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
     Route::get('buscar/producto', 'ProductController@search')->name('buscar.producto');
     // ForceDeletes
         Route::get('productos/papelera','ProductController@papelera')->name('papelera');
-        Route::get('productos/restore/{id}','ProductController@restore')->name('productos.restore');
+        Route::patch('productos/{code}/restore','ProductController@restore')->name('productos.restore');
         Route::delete('productos/{code}/forceDelete','ProductController@forceDelete')->name('productos.forceDelete');
     // EndForceDeletes
     Route::resource('productos','ProductController')
@@ -38,5 +38,5 @@ Route::resource('proveedores','ProviderController')
 ->parameters(['proveedores'=>'provider'])->names('proveedores');
 
 Auth::routes();
-
+// Route::resource('caja','CajaController@index');
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

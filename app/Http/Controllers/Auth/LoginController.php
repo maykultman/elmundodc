@@ -37,4 +37,17 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    // protected function redirectTo()
+    // {
+    //     // dd(auth()->user()->rol->rol);
+    //     if (auth()->user()->rol == 'admin') {
+    //         return redirect('/productos');
+    //     }
+    //     if (auth()->user()->rol == 'cajero') {
+    //         return redirect('/caja');
+    //         // return '/caja';
+    //     }
+    //     return '/productos';
+    // }
 }
